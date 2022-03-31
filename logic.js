@@ -1,7 +1,5 @@
 var searchResultFormat = '<tr><td><a href="$link" target="_blank">$link2</a></td><td align="left">$line</td></tr>';
-var linkTemplate = 'https://youtube.com/watch?v=$video&t=$time';
 var totalLimit = 250;
-var replaceStrings = ['HackTheBox - ', 'VulnHub - '];
 var posmatch=[];
 var negmatch=[];
 var controls = {
@@ -31,7 +29,7 @@ var controls = {
                 regex += '(?=.*' + words[i] + ')';
             } else {
                 negmatch.push(words[i].substring(1));
-                //regex += '(^((?!' + words[i].substring(1) + ').)*$)';
+                
             }
         }
         if (negmatch.length > 0 ) {
@@ -47,7 +45,7 @@ var controls = {
 
         dataset.forEach(e => {
        if ( (e.link + e.line).toLowerCase().match(regex) ) results.push(e);
-            //if (e.line.toLowerCase().match(regex) || e.machine.toLowerCase().match(regex)) results.push(e);
+           
         });
         return results;
     },
@@ -72,9 +70,6 @@ var controls = {
             resultsTableHideable.classList.remove('hide');
 
             results.forEach(r => {
-                //Not the fastest but it makes for easier to read code :>
-
-               // timeInSeconds = r.timestamp.minutes * 60 + r.timestamp.seconds;
                 el = searchResultFormat
                     .replace('$line', r.line)
                     .replace('$link',r.link)
@@ -93,7 +88,7 @@ var controls = {
         var colorTestRegex = /^color-/i;
 
         loc.classList.forEach(cls => {
-            //we cant use class so we use cls instead :>
+            
             if (cls.match(colorTestRegex)) loc.classList.remove(cls);
         });
         loc.classList.add('color-' + indicator);
